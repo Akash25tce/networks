@@ -6,8 +6,7 @@ import TopBar from './components/TopBar.vue'
   <div class="min-h-screen bg-gray-100 font-sans text-gray-900">
     <TopBar />
     
-    <main class="py-8">
-      <router-view v-slot="{ Component }">
+    <main> <router-view v-slot="{ Component }">
         <transition name="fade-slide" mode="out-in">
           <component :is="Component" />
         </transition>
