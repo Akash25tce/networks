@@ -1,7 +1,7 @@
 export const syllabus = [
   {
     id: 'network-models',
-    title: '1. Network Models',
+    title: 'Network Models',
     icon: '🌐',
     content: `
       <div class="space-y-8">
@@ -32,7 +32,7 @@ export const syllabus = [
   },
   {
     id: 'switching',
-    title: '2. Switching',
+    title: 'Switching',
     icon: '🔀',
     content: `
       <div class="space-y-8">
@@ -60,7 +60,7 @@ export const syllabus = [
   },
   {
     id: 'network-types',
-    title: '3. Network Types',
+    title: 'Network Types',
     icon: '🏢',
     content: `
       <div class="space-y-8">
@@ -95,7 +95,7 @@ export const syllabus = [
   },
   {
     id: 'physical-layer',
-    title: '4. Physical Layer',
+    title: 'Physical Layer',
     icon: '🔌',
     content: `
       <div class="space-y-8">
@@ -122,7 +122,7 @@ export const syllabus = [
   },
   {
     id: 'datalink-layer',
-    title: '5. Datalink Layer',
+    title: 'Datalink Layer',
     icon: '🔗',
     content: `
       <div class="space-y-6">
@@ -153,7 +153,7 @@ export const syllabus = [
   },
   {
     id: 'network-layer',
-    title: '6. Network Layer',
+    title: 'Network Layer',
     icon: '🗺️',
     content: `
       <div class="space-y-6">
@@ -186,7 +186,7 @@ export const syllabus = [
   },
   {
     id: 'transport-layer',
-    title: '7. Transport Layer',
+    title: 'Transport Layer',
     icon: '🚚',
     content: `
       <div class="space-y-8">
@@ -218,7 +218,7 @@ export const syllabus = [
   },
   {
     id: 'presentation-layer',
-    title: '8. Presentation Layer',
+    title: 'Presentation Layer',
     icon: '🎭',
     content: `
       <div class="space-y-6">
@@ -238,7 +238,7 @@ export const syllabus = [
   },
   {
     id: 'application-layer',
-    title: '9. Application Layer',
+    title: '  Application Layer',
     icon: '📱',
     content: `
       <div class="space-y-6">
