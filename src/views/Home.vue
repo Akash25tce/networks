@@ -42,8 +42,42 @@
       </div>
     </header>
 
-    <div class="max-w-6xl mx-auto px-6 space-y-24 mt-16">
+    <div class="max-w-6xl mx-auto px-6 space-y-24 mt-8 md:mt-16">
       
+      <section v-if="completedModules.length > 0" class="relative z-20 animate-slide-up">
+        <div class="bg-white rounded-3xl shadow-xl border border-blue-100 p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8">
+          
+          <div class="flex-1 w-full">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">Welcome back! 🎓</h2>
+            <p class="text-gray-500 mb-6">You are making great progress on your network training.</p>
+            
+            <div class="w-full bg-gray-100 rounded-full h-4 mb-3 overflow-hidden border border-gray-200">
+              <div class="bg-gradient-to-r from-green-400 to-blue-500 h-4 rounded-full transition-all duration-1000 ease-out" :style="`width: ${progressPercentage}%`"></div>
+            </div>
+            <div class="flex justify-between text-sm font-bold text-gray-400 uppercase tracking-wider">
+              <span>{{ completedModules.length }} Modules Completed</span>
+              <span class="text-blue-600">{{ progressPercentage }}%</span>
+            </div>
+          </div>
+
+          <div class="shrink-0 w-full md:w-auto text-center md:text-right">
+            <router-link 
+              v-if="nextModule" 
+              :to="'/lesson/' + nextModule.id" 
+              class="inline-flex items-center gap-3 px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-2xl shadow-lg transition-transform hover:-translate-y-1 w-full md:w-auto justify-center"
+            >
+              Resume: {{ nextModule.title.split('.')[0] }} 
+              <span class="text-xl">→</span>
+            </router-link>
+            
+            <div v-else class="inline-flex items-center gap-3 px-8 py-4 bg-green-500 text-white font-bold rounded-2xl shadow-lg w-full md:w-auto justify-center cursor-default">
+              🎉 100% Curriculum Completed!
+            </div>
+          </div>
+
+        </div>
+      </section>
+
       <section class="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-12 transform transition-all hover:shadow-2xl">
         <div class="text-center mb-12">
           <h2 class="text-3xl font-bold text-gray-900">Get Started in Minutes</h2>
@@ -97,7 +131,7 @@
         </div>
       </section>
 
-     <section class="pb-12">
+      <section class="pb-12">
         <div class="text-center mb-12">
           <h2 class="text-3xl font-bold text-gray-900">System Flow</h2>
           <div class="w-24 h-1 bg-blue-500 mx-auto mt-4 rounded-full"></div>
@@ -171,7 +205,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted, computed } from 'vue';
+import { syllabus } from '../data/syllabus.js';
 
 const showVideo = ref(false);
 
@@ -181,6 +216,28 @@ const scrollToVideo = () => {
     element.scrollIntoView({ behavior: 'smooth' });
   }
 };
+
+// --- NEW: Dashboard Gamification Logic ---
+const completedModules = ref([]);
+
+// Fetch data when page loads
+onMounted(() => {
+  const saved = localStorage.getItem('completedModules');
+  if (saved) {
+    completedModules.value = JSON.parse(saved);
+  }
+});
+
+// Calculate the percentage
+const progressPercentage = computed(() => {
+  if (syllabus.length === 0) return 0;
+  return Math.round((completedModules.value.length / syllabus.length) * 100);
+});
+
+// Find the very next unread module in the array
+const nextModule = computed(() => {
+  return syllabus.find(lesson => !completedModules.value.includes(lesson.id)) || null;
+});
 </script>
 
 <style scoped>
